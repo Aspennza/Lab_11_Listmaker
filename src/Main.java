@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,7 +10,6 @@ public class Main
     {
         Scanner in = new Scanner(System.in);
         ArrayList<String> listContainer = new ArrayList<>();
-        String menu = "";
         String menuChoice = "";
 
 
@@ -32,7 +30,8 @@ public class Main
                     break;
                 case "i":
                 case "I":
-
+                    insertItem(in, listContainer);
+                    break;
                 case "p":
                 case "P":
 
@@ -42,7 +41,7 @@ public class Main
 
 
 
-        }while(!menu.equalsIgnoreCase("Q"));
+        }while(!menuChoice.equalsIgnoreCase("Q"));
     }
 
     private static void addItem(Scanner pipe, ArrayList<String> list)
@@ -81,7 +80,9 @@ public class Main
 
         itemIndex = SafeInput.getRangedInt(pipe, "Enter the list number where you want your item inserted", lowRange, highRange);
 
+        itemIndex = itemIndex - 1;
 
+        list.add(itemIndex, listItem);
     }
 
     private static void display(ArrayList<String> list)
