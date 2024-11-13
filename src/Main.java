@@ -11,6 +11,8 @@ public class Main
         Scanner in = new Scanner(System.in);
         ArrayList<String> listContainer = new ArrayList<>();
         String menuChoice = "";
+        String menuChoiceContinue = "";
+        boolean quit = false;
 
 
         do {
@@ -34,14 +36,14 @@ public class Main
                     break;
                 case "p":
                 case "P":
-
+                    printList(listContainer);
+                    break;
                 case "q":
                 case "Q":
+                    menuChoiceContinue = quitListMaker(in, menuChoice);
+                    break;
             }
-
-
-
-        }while(!menuChoice.equalsIgnoreCase("Q"));
+        }while(!menuChoiceContinue.equalsIgnoreCase("Q"));
     }
 
     private static void addItem(Scanner pipe, ArrayList<String> list)
@@ -83,6 +85,31 @@ public class Main
         itemIndex = itemIndex - 1;
 
         list.add(itemIndex, listItem);
+    }
+
+    private static void printList(ArrayList<String> list)
+    {
+        for(int x = 0; x < list.size(); x++)
+        {
+            System.out.println(list.get(x));
+        }
+        System.out.println("-----------------------");
+        System.out.println();
+    }
+
+    private static String quitListMaker(Scanner pipe, String menuChoice)
+    {
+        boolean quit = false;
+
+        quit = SafeInput.getYNConfirm(pipe, "Are you sure you want to quit?");
+
+        if(quit) {
+            System.exit(0);
+        }
+
+            menuChoice = "";
+
+        return menuChoice;
     }
 
     private static void display(ArrayList<String> list)
